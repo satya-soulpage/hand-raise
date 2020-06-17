@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" const="text/html;charset=UTF-8" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <title>Express Chat App</title>
+  </head>
+
+  <body>
+    <header>
+      <h1>Click for Hand Raise</h1>
+    </header>
+
+    <section>
+      <div >
+        <button id="hand">
+        <img src="https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/17267238241553169549-512.png">
+      </button>
+      </div>
+    </section>
+
+  
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <!-- <script src="chat.js"></script> -->
+  </body>
+</html>
+
+<script>
+
+  var socket = io.connect("http://localhost:3000");
+  var hand = $("#hand");
+  
+  hand.click(function(){
+    //Emit hand
+    socket.emit("hand", {
+      url: "https://cdn2.iconfinder.com/data/icons/school-set-3/512/3-512.png"
+    });
+
+    
+  })
+  socket.on("hand-raise",(data) =>{
+      console.log(0)
+      hand.html(`<img src="${data.url}">`)
+    })
+</script>
